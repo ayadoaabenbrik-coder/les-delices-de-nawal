@@ -99,4 +99,7 @@ footer {
   max-width: 100%;
   height: auto;
   display: block;
+  width: 300px;      /* ajuste : 200px / 250px / 300px */
+  height: auto;
+  display: block;
 }
