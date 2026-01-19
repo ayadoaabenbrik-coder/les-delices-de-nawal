@@ -105,4 +105,7 @@ footer {
   width: 300px;      /* ajuste : 200px / 250px / 300px */
   height: auto;
   display: block;
+  margin: 0 auto;
+  max-width: 40%;
+  height: auto;
 }
