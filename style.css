@@ -109,3 +109,6 @@ footer {
   max-width: 40%;
   height: auto;
 }
+img {
+  border: 5px solid red;
+}
