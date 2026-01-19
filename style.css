@@ -7,12 +7,12 @@ body {
   font-family: 'Segoe UI', Arial, sans-serif;
   background: #faf6f0;
   color: #333;
-  background: red;
+  background: rgb(213, 144, 144);
   
 }
 
 header {
-  background: #7b1e1e;
+  background: #431111;
   color: white;
   padding: 20px;
   text-align: center;
@@ -32,7 +32,7 @@ header nav a {
 .hero {
   padding: 60px 20px;
   text-align: center;
-  background: linear-gradient(#fff, #f3e6d8);
+  background: linear-gradient(#fff, #b89f85);
 }
 
 .cards {
@@ -44,7 +44,7 @@ header nav a {
 }
 
 .card {
-  background: white;
+  background: rgb(217, 211, 211);
   padding: 20px;
   width: 250px;
   border-radius: 10px;
@@ -89,7 +89,7 @@ footer {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #25d366;
+  background: #848785;
   color: white;
   padding: 14px 18px;
   border-radius: 50px;
@@ -112,5 +112,5 @@ footer {
   height: auto;
 }
 img {
-  border: 5px solid red;
+  border: 5px solid rgb(130, 114, 114);
 }
