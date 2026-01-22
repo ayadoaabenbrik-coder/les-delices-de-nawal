@@ -15,8 +15,10 @@
 }
 
 body {
-  background: linear-gradient(120deg, #0e0e0e, #1b1b1b);
-  color: var(--text);
+  background: var(--bg);
+  color: var(--dark);
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.7;
 }
 
 /* TOP BAR */
@@ -201,3 +203,4 @@ body {
   background: black;
   font-size: 13px;
 }
+
