@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Les Délices Marocains</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Les Délices Marocains</h1>
+      <ul>
+        <li><a href="/">Accueil</a></li>
+        <li><a href="#plats">Plats</a></li>
+        <li><a href="#commande">Commande</a></li>
+        <li id="auth-links"><a href="login.html">Connexion</a> / <a href="register.html">Inscription</a></li>
+        <li id="user-links" class="hidden"><a href="account.html">Mon compte</a></li>
+        <li id="admin-link" class="hidden"><a href="admin.html">Admin</a></li>
+        <li id="user-links" class="hidden"><button onclick="logout()">Déconnexion</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Saveurs marocaines faites avec passion</h2>
+    <p>
+      Découvrez des plats salés et sucrés préparés avec soin. Pour le paiement,
+      vous nous contactez d’abord, puis nous organisons la suite ensemble.
+    </p>
+    <a class="btn" href="#commande">Commander</a>
+  </section>
+
+  <section class="section" id="plats">
+    <h2 class="section-title">Nos plats</h2>
+    <div class="cards" id="plats-container"></div>
+  </section>
+
+  <section class="section" id="commande">
+    <h2 class="section-title">Demande de commande</h2>
+    <div class="form-container">
+      <h2>Contactez-nous pour commander</h2>
+      <form id="demande-form">
+        <input type="text" id="nom" placeholder="Votre nom" required />
+        <input type="email" id="email-demande" placeholder="Votre email" required />
+        <input type="text" id="telephone" placeholder="Votre téléphone" required />
+        <select id="plat" required>
+          <option value="">Choisir un plat</option>
+        </select>
+        <input type="number" id="quantite" min="1" placeholder="Quantité" required />
+        <input type="date" id="date_souhaitee" />
+        <textarea id="message" placeholder="Votre message"></textarea>
+        <button class="btn" type="submit">Envoyer la demande</button>
+      </form>
+      <div id="demande-message" class="message-box"></div>
+      <p class="center small">Le paiement n'est pas automatique. Nous vous recontactons d'abord.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Les Délices Marocains - Fait maison avec amour</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

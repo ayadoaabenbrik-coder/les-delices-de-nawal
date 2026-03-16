@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Les Délices Marocains</h1>
+      <ul>
+        <li><a href="/">Accueil</a></li>
+        <li><a href="login.html">Connexion</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="form-container">
+    <h2>Créer un compte</h2>
+    <form id="register-form">
+      <input type="text" id="fullname" placeholder="Nom complet" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Mot de passe" required />
+      <button class="btn" type="submit">Créer mon compte</button>
+    </form>
+    <div id="register-message" class="message-box"></div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

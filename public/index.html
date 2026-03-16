@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Délices Marocains</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --beige: #f5f0e6;
+      --baby-pink: #ffc0cb;
+      --bordeaux: #800020;
+      --transition-speed: 0.3s;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--beige);
+      color: var(--bordeaux);
+    }
+
+    header {
+      background-color: var(--baby-pink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-weight: 600;
+      font-size: 1.8rem;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--bordeaux);
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: var(--bordeaux);
+      transition: width var(--transition-speed);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: var(--bordeaux);
+    }
+
+    h3 {
+      color: var(--bordeaux);
+    }
+
+    .intro-box,
+    .auth-box,
+    .summary-box,
+    .contact-box,
+    .cart-item,
+    .modal-box,
+    .card {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    .intro-box,
+    .auth-box,
+    .summary-box,
+    .contact-box {
+      padding: 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      overflow: hidden;
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.16);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-content {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-content h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .price {
+      font-weight: 600;
+      color: #d36c8c;
+      margin-bottom: 0.5rem;
+    }
+
+    .quote {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .order-btn,
+    .main-order-btn,
+    .auth-btn,
+    .secondary-btn,
+    .contact-link {
+      background: var(--bordeaux);
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .secondary-btn {
+      background: #d36c8c;
+    }
+
+    .order-btn:hover,
+    .main-order-btn:hover,
+    .auth-btn:hover,
+    .secondary-btn:hover,
+    .contact-link:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+    }
+
+    .card .order-btn {
+      margin-top: auto;
+    }
+
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .auth-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: #f3d5db;
+      color: var(--bordeaux);
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .tab-btn.active {
+      background: var(--bordeaux);
+      color: white;
+    }
+
+    .auth-form {
+      display: none;
+    }
+
+    .auth-form.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d9caca;
+      border-radius: 10px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .small-text {
+      font-size: 0.92rem;
+      color: #666;
+      margin-top: 10px;
+    }
+
+    .status-box {
+      margin-top: 1rem;
+      padding: 12px;
+      border-radius: 10px;
+      background: #f8edf1;
+      color: var(--bordeaux);
+      font-weight: 600;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #fffaf7;
+      width: 100%;
+      max-width: 520px;
+      padding: 25px;
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      font-size: 28px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--bordeaux);
+    }
+
+    .quantity-block,
+    .note-block,
+    .total-block,
+    #crepe-choice {
+      margin-top: 18px;
+    }
+
+    .counter {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .counter button {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 50%;
+      background: #f3d5db;
+      color: var(--bordeaux);
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #quantity-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    #cart-items {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .cart-item {
+      padding: 15px;
+    }
+
+    .cart-item h4 {
+      margin-bottom: 8px;
+      color: var(--bordeaux);
+    }
+
+    .cart-item p {
+      margin: 4px 0;
+      color: #444;
+    }
+
+    .remove-btn {
+      margin-top: 10px;
+      background: #d85b75;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .cart-total {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .checkout-wrap {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .summary-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .summary-line {
+      padding: 12px;
+      background: #fdf5f7;
+      border-radius: 10px;
+    }
+
+    .contact-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1.2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background-color: var(--baby-pink);
+      margin-top: 3rem;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .two-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Le Secret des saveurs</h1>
+    <nav>
+      <a href="#compte">Compte</a>
+      <a href="#prix">Prix</a>
+      <a href="#panier">Commande</a>
+      <a href="#validation">Validation</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section>
+    <div class="intro-box fade-in">
+      <h2>Bienvenue</h2>
+      <p style="text-align:center; line-height:1.8;">
+        Créez votre compte ou connectez-vous, choisissez vos plats, ajoutez vos préférences,
+        puis envoyez votre demande de commande. Le paiement se fera après échange avec nous.
+      </p>
+    </div>
+  </section>
+
+  <section id="compte">
+    <h2>Connexion / Créer un compte</h2>
+
+    <div class="two-columns">
+      <div class="auth-box fade-in">
+        <div class="auth-tabs">
+          <button class="tab-btn active" data-tab="login">Connexion</button>
+          <button class="tab-btn" data-tab="register">Créer un compte</button>
+        </div>
+
+        <form id="login-form" class="auth-form active">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" placeholder="votre email">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Mot de passe</label>
+            <input type="password" id="login-password" placeholder="votre mot de passe">
+          </div>
+          <button type="submit" class="auth-btn">Se connecter</button>
+        </form>
+
+        <form id="register-form" class="auth-form">
+          <div class="form-group">
+            <label for="register-name">Nom complet</label>
+            <input type="text" id="register-name" placeholder="votre nom">
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input type="email" id="register-email" placeholder="votre email">
+          </div>
+          <div class="form-group">
+            <label for="register-phone">Téléphone</label>
+            <input type="text" id="register-phone" placeholder="votre numéro">
+          </div>
+          <div class="form-group">
+            <label for="register-password">Mot de passe</label>
+            <input type="password" id="register-password" placeholder="créez un mot de passe">
+          </div>
+          <button type="submit" class="auth-btn">Créer mon compte</button>
+        </form>
+
+        <div id="auth-status" class="status-box hidden"></div>
+      </div>
+
+      <div class="auth-box fade-in">
+        <h3>Votre espace client</h3>
+        <div id="client-info" class="summary-grid">
+          <div class="summary-line"><strong>Statut :</strong> <span id="client-status">Non connecté</span></div>
+          <div class="summary-line"><strong>Nom :</strong> <span id="client-name">-</span></div>
+          <div class="summary-line"><strong>Email :</strong> <span id="client-email">-</span></div>
+          <div class="summary-line"><strong>Téléphone :</strong> <span id="client-phone">-</span></div>
+        </div>
+
+        <div style="margin-top:1rem; display:flex; gap:10px; flex-wrap:wrap;">
+          <button id="logout-btn" class="secondary-btn hidden">Se déconnecter</button>
+        </div>
+
+        <p class="small-text">
+          Cette version fonctionne dans le navigateur. Pour une vraie connexion sécurisée,
+          il faudra plus tard ajouter une base de données et un backend.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="prix">
+    <h2>Nos Prix</h2>
+
+    <div class="grid">
+      <div class="card fade-in">
+        <img src="images/batbout copy.png" alt="Batbout">
+        <div class="card-content">
+          <h3>Batbout</h3>
+          <p class="price">2,50€ / pièce</p>
+          <p class="quote">"Le petit pain marocain qui met tout le monde d’accord."</p>
+          <button class="order-btn" data-name="Batbout" data-price="2.5" data-unit="pièce" data-type="simple">Commander</button>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <img src="images/WhatsApp Image 2026-03-08 at 20.14.18.jpeg" alt="Msemen farci">
+        <div class="card-content">
+          <h3>Msemen farci</h3>
+          <p class="price">4,50€ / pièce</p>
+          <p class="quote">"Croustillant dehors, fondant dedans."</p>
+          <button class="order-btn" data-name="Msemen farci" data-price="4.5" data-unit="pièce" data-type="simple">Commander</button>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <img src="images/WhatsApp Image 2026-03-08 at 20.14.19.jpeg" alt="Tajine sucré salé">
+        <div class="card-content">
+          <h3>Tajine sucré salé</h3>
+          <p class="price">9,50€ / personne</p>
+          <p class="quote">"Le mélange parfait entre douceur et caractère."</p>
+          <button class="order-btn" data-name="Tajine sucré salé" data-price="9.5" data-unit="personne" data-type="plat">Commander</button>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <img src="images/WhatsApp Image 2026-03-08 at 20.14.23.jpeg" alt="Mini batbout">
+        <div class="card-content">
+          <h3>Mini batbout</h3>
+          <p class="price">1,50€ / pièce</p>
+          <p class="quote">"Petit format, grand plaisir."</p>
+          <button class="order-btn" data-name="Mini batbout" data-price="1.5" data-unit="pièce" data-type="simple">Commander</button>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <img src="images/rafissa.png" alt="Rafissa">
+        <div class="card-content">
+          <h3>Rafissa</h3>
+          <p class="price">10,50€ / personne</p>
+          <p class="quote">"Un plat généreux qui réchauffe le cœur."</p>
+          <button class="order-btn" data-name="Rafissa" data-price="10.5" data-unit="personne" data-type="plat">Commander</button>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <img src="images/msemen.png" alt="Msemen">
+        <div class="card-content">
+          <h3>Msemen</h3>
+          <p class="price">2,00€ / pièce</p>
+          <p class="quote">"La galette marocaine à savourer à toute heure."</p>
+          <button class="order-btn" data-name="Msemen" data-price="2" data-unit="pièce" data-type="simple">Commander</button>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <img src="images/ChatGPT Image Mar 16, 2026 at 08_52_42 PM.png" alt="Crêpes">
+        <div class="card-content">
+          <h3>Crêpes sucrées / salées</h3>
+          <p class="price">3,50€ / pièce</p>
+          <p class="quote">"Sucrées ou salées, elles font toujours plaisir."</p>
+          <button class="order-btn" data-name="Crêpes" data-price="3.5" data-unit="pièce" data-type="crepe">Commander</button>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <img src="images/couscous.png" alt="Couscous">
+        <div class="card-content">
+          <h3>Couscous</h3>
+          <p class="price">11,00€ / personne</p>
+          <p class="quote">"Le grand classique marocain, généreux et savoureux."</p>
+          <button class="order-btn" data-name="Couscous" data-price="11" data-unit="personne" data-type="plat">Commander</button>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <img src="images/pastilla.png" alt="Pastilla">
+        <div class="card-content">
+          <h3>Pastilla</h3>
+          <p class="price">6,00€ / part</p>
+          <p class="quote">"Le croustillant raffiné aux saveurs marocaines."</p>
+          <button class="order-btn" data-name="Pastilla" data-price="6" data-unit="part" data-type="simple">Commander</button>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <img src="images/seffa.png" alt="Seffa">
+        <div class="card-content">
+          <h3>Seffa</h3>
+          <p class="price">5,50€ / portion</p>
+          <p class="quote">"Une douceur parfumée qui fait voyager."</p>
+          <button class="order-btn" data-name="Seffa" data-price="5.5" data-unit="portion" data-type="simple">Commander</button>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <img src="images/tiramisu.png" alt="Tiramisu">
+        <div class="card-content">
+          <h3>Tiramisu</h3>
+          <p class="price">4,50€ / part</p>
+          <p class="quote">"La touche gourmande pour finir sur une note légère."</p>
+          <button class="order-btn" data-name="Tiramisu" data-price="4.5" data-unit="part" data-type="simple">Commander</button>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <img src="images/9rachel.png" alt="Krachel">
+        <div class="card-content">
+          <h3>Krachel</h3>
+          <p class="price">2,50€ / pièce</p>
+          <p class="quote">"La brioche marocaine douce et parfumée."</p>
+          <button class="order-btn" data-name="Krachel" data-price="2.5" data-unit="pièce" data-type="simple">Commander</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="panier" class="cart-section">
+    <h2>Votre commande</h2>
+    <div id="cart-items"></div>
+    <p class="cart-total">Total général : <span id="cart-total">0,00€</span></p>
+    <div class="checkout-wrap">
+      <button id="checkout-btn" class="main-order-btn">Valider ma demande</button>
+    </div>
+  </section>
+
+  <section id="validation">
+    <h2>Validation de la commande</h2>
+
+    <div class="two-columns">
+      <div class="summary-box fade-in">
+        <h3>Résumé client</h3>
+        <div class="summary-grid">
+          <div class="summary-line"><strong>Nom :</strong> <span id="summary-name">-</span></div>
+          <div class="summary-line"><strong>Email :</strong> <span id="summary-email">-</span></div>
+          <div class="summary-line"><strong>Téléphone :</strong> <span id="summary-phone">-</span></div>
+          <div class="summary-line"><strong>Total commande :</strong> <span id="summary-total">0,00€</span></div>
+        </div>
+        <div id="summary-order-list" style="margin-top:1rem;"></div>
+      </div>
+
+      <div class="contact-box fade-in">
+        <h3>Contact avant paiement</h3>
+        <p style="line-height:1.8;">
+          Une fois votre commande choisie, contactez-nous d’abord pour confirmer la disponibilité,
+          l’heure, la livraison ou le retrait, puis nous verrons ensemble le paiement.
+        </p>
+
+        <div class="contact-actions">
+          <a class="contact-link" href="tel:0744239150">Appeler</a>
+          <a class="contact-link" href="mailto:lesecretdessaveurs@gmail.com">Envoyer un email</a>
+        </div>
+
+        <p class="small-text" style="margin-top:1rem;">
+          Plus tard, si tu veux, on pourra ajouter un vrai paiement en ligne.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contactez-nous</h2>
+    <p style="text-align:center;">📞 07 44 23 91 50 | ✉️ lesecretdessaveurs@gmail.com</p>
+  </section>
+
+  <footer>
+    &copy; 2026 le secret des saveurs. Tous droits réservés.
+  </footer>
+
+  <div id="order-modal" class="modal">
+    <div class="modal-box">
+      <button id="close-modal" class="close-modal">&times;</button>
+
+      <h3 id="modal-product-name">Produit</h3>
+      <p id="modal-product-price"></p>
+
+      <div id="crepe-choice" class="hidden">
+        <label for="crepe-type">Choisissez votre crêpe :</label>
+        <select id="crepe-type">
+          <option value="Sucrée">Sucrée</option>
+          <option value="Salée">Salée</option>
+        </select>
+      </div>
+
+      <div class="quantity-block">
+        <label id="quantity-label" for="quantity-value">Quantité</label>
+        <div class="counter">
+          <button type="button" id="minus-btn">-</button>
+          <span id="quantity-value">1</span>
+          <button type="button" id="plus-btn">+</button>
+        </div>
+      </div>
+
+      <div class="note-block">
+        <label for="customer-note">Description / ingrédients à enlever :</label>
+        <textarea id="customer-note" rows="4" placeholder="Exemple : sans oignon, sans olives, plus de sauce..."></textarea>
+      </div>
+
+      <div class="total-block">
+        <strong>Total : <span id="total-price">0,00€</span></strong>
+      </div>
+
+      <button id="add-to-cart" class="main-order-btn">Ajouter au panier</button>
+    </div>
+  </div>
+
+  <script>
+    const faders = document.querySelectorAll('.fade-in');
+
+    const appearOptions = {
+      threshold: 0.2,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
+    });
+
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const authForms = document.querySelectorAll(".auth-form");
+    const loginForm = document.getElementById("login-form");
+    const registerForm = document.getElementById("register-form");
+    const authStatus = document.getElementById("auth-status");
+    const logoutBtn = document.getElementById("logout-btn");
+
+    const clientStatus = document.getElementById("client-status");
+    const clientName = document.getElementById("client-name");
+    const clientEmail = document.getElementById("client-email");
+    const clientPhone = document.getElementById("client-phone");
+
+    const summaryName = document.getElementById("summary-name");
+    const summaryEmail = document.getElementById("summary-email");
+    const summaryPhone = document.getElementById("summary-phone");
+    const summaryTotal = document.getElementById("summary-total");
+    const summaryOrderList = document.getElementById("summary-order-list");
+
+    let currentUser = null;
+    let cart = [];
+    let currentProduct = null;
+    let currentQuantity = 1;
+
+    function formatPrice(value) {
+      return value.toFixed(2).replace(".", ",") + "€";
+    }
+
+    function showAuthStatus(message) {
+      authStatus.textContent = message;
+      authStatus.classList.remove("hidden");
+    }
+
+    function refreshUserUI() {
+      if (currentUser) {
+        clientStatus.textContent = "Connecté";
+        clientName.textContent = currentUser.name || "-";
+        clientEmail.textContent = currentUser.email || "-";
+        clientPhone.textContent = currentUser.phone || "-";
+
+        summaryName.textContent = currentUser.name || "-";
+        summaryEmail.textContent = currentUser.email || "-";
+        summaryPhone.textContent = currentUser.phone || "-";
+
+        logoutBtn.classList.remove("hidden");
+      } else {
+        clientStatus.textContent = "Non connecté";
+        clientName.textContent = "-";
+        clientEmail.textContent = "-";
+        clientPhone.textContent = "-";
+
+        summaryName.textContent = "-";
+        summaryEmail.textContent = "-";
+        summaryPhone.textContent = "-";
+
+        logoutBtn.classList.add("hidden");
+      }
+    }
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        tabButtons.forEach(b => b.classList.remove("active"));
+        authForms.forEach(form => form.classList.remove("active"));
+
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab + "-form").classList.add("active");
+      });
+    });
+
+    registerForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("register-name").value.trim();
+      const email = document.getElementById("register-email").value.trim().toLowerCase();
+      const phone = document.getElementById("register-phone").value.trim();
+      const password = document.getElementById("register-password").value.trim();
+
+      if (!name || !email || !phone || !password) {
+        showAuthStatus("Veuillez remplir tous les champs.");
+        return;
+      }
+
+      const existingUser = savedUsers.find(user => user.email === email);
+      if (existingUser) {
+        showAuthStatus("Un compte existe déjà avec cet email.");
+        return;
+      }
+
+      const newUser = { name, email, phone, password };
+      savedUsers.push(newUser);
+      localStorage.setItem("users", JSON.stringify(savedUsers));
+
+      currentUser = newUser;
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+      registerForm.reset();
+      showAuthStatus("Compte créé avec succès.");
+      refreshUserUI();
+    });
+
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("login-email").value.trim().toLowerCase();
+      const password = document.getElementById("login-password").value.trim();
+
+      const foundUser = savedUsers.find(user => user.email === email && user.password === password);
+
+      if (!foundUser) {
+        showAuthStatus("Email ou mot de passe incorrect.");
+        return;
+      }
+
+      currentUser = foundUser;
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      loginForm.reset();
+      showAuthStatus("Connexion réussie.");
+      refreshUserUI();
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      currentUser = null;
+      localStorage.removeItem("currentUser");
+      showAuthStatus("Vous êtes déconnecté.");
+      refreshUserUI();
+    });
+
+    const orderButtons = document.querySelectorAll(".order-btn");
+    const modal = document.getElementById("order-modal");
+    const closeModal = document.getElementById("close-modal");
+
+    const modalProductName = document.getElementById("modal-product-name");
+    const modalProductPrice = document.getElementById("modal-product-price");
+    const quantityLabel = document.getElementById("quantity-label");
+    const quantityValue = document.getElementById("quantity-value");
+    const minusBtn = document.getElementById("minus-btn");
+    const plusBtn = document.getElementById("plus-btn");
+    const totalPrice = document.getElementById("total-price");
+    const addToCartBtn = document.getElementById("add-to-cart");
+    const customerNote = document.getElementById("customer-note");
+    const crepeChoice = document.getElementById("crepe-choice");
+    const crepeType = document.getElementById("crepe-type");
+
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const checkoutBtn = document.getElementById("checkout-btn");
+
+    function updateModalTotal() {
+      if (!currentProduct) return;
+      const total = currentProduct.price * currentQuantity;
+      totalPrice.textContent = formatPrice(total);
+    }
+
+    function openModal(product) {
+      currentProduct = product;
+      currentQuantity = 1;
+
+      modalProductName.textContent = product.name;
+      modalProductPrice.textContent = formatPrice(product.price) + " / " + product.unit;
+      quantityValue.textContent = currentQuantity;
+      customerNote.value = "";
+      crepeType.value = "Sucrée";
+
+      if (product.type === "plat") {
+        quantityLabel.textContent = "Nombre de personnes";
+        crepeChoice.classList.add("hidden");
+      } else if (product.type === "crepe") {
+        quantityLabel.textContent = "Nombre de crêpes";
+        crepeChoice.classList.remove("hidden");
+      } else {
+        quantityLabel.textContent = "Nombre de pièces";
+        crepeChoice.classList.add("hidden");
+      }
+
+      updateModalTotal();
+      modal.classList.add("active");
+    }
+
+    function closeOrderModal() {
+      modal.classList.remove("active");
+    }
+
+    orderButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const product = {
+          name: button.dataset.name,
+          price: parseFloat(button.dataset.price),
+          unit: button.dataset.unit,
+          type: button.dataset.type
+        };
+
+        openModal(product);
+      });
+    });
+
+    plusBtn.addEventListener("click", () => {
+      currentQuantity++;
+      quantityValue.textContent = currentQuantity;
+      updateModalTotal();
+    });
+
+    minusBtn.addEventListener("click", () => {
+      if (currentQuantity > 1) {
+        currentQuantity--;
+        quantityValue.textContent = currentQuantity;
+        updateModalTotal();
+      }
+    });
+
+    closeModal.addEventListener("click", closeOrderModal);
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeOrderModal();
+      }
+    });
+
+    function renderCart() {
+      cartItems.innerHTML = "";
+      let totalGeneral = 0;
+
+      cart.forEach((item, index) => {
+        totalGeneral += item.total;
+
+        const div = document.createElement("div");
+        div.className = "cart-item";
+
+        div.innerHTML = `
+          <h4>${item.name}</h4>
+          ${item.variant ? `<p><strong>Choix :</strong> ${item.variant}</p>` : ""}
+          <p><strong>Quantité :</strong> ${item.quantity}</p>
+          <p><strong>Note :</strong> ${item.note ? item.note : "Aucune précision"}</p>
+          <p><strong>Total :</strong> ${formatPrice(item.total)}</p>
+          <button class="remove-btn" data-index="${index}">Supprimer</button>
+        `;
+
+        cartItems.appendChild(div);
+      });
+
+      cartTotal.textContent = formatPrice(totalGeneral);
+      summaryTotal.textContent = formatPrice(totalGeneral);
+
+      renderSummaryOrder();
+
+      document.querySelectorAll(".remove-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const index = parseInt(btn.dataset.index, 10);
+          cart.splice(index, 1);
+          renderCart();
+        });
+      });
+    }
+
+    function renderSummaryOrder() {
+      if (cart.length === 0) {
+        summaryOrderList.innerHTML = '<div class="summary-line">Aucune commande pour le moment.</div>';
+        return;
+      }
+
+      summaryOrderList.innerHTML = cart.map(item => `
+        <div class="summary-line">
+          <strong>${item.name}</strong><br>
+          ${item.variant ? `Choix : ${item.variant}<br>` : ""}
+          Quantité : ${item.quantity}<br>
+          Note : ${item.note ? item.note : "Aucune précision"}<br>
+          Total : ${formatPrice(item.total)}
+        </div>
+      `).join("");
+    }
+
+    addToCartBtn.addEventListener("click", () => {
+      if (!currentProduct) return;
+
+      let variant = "";
+      if (currentProduct.type === "crepe") {
+        variant = crepeType.value;
+      }
+
+      const itemTotal = currentProduct.price * currentQuantity;
+
+      cart.push({
+        name: currentProduct.name,
+        quantity: currentQuantity,
+        variant: variant,
+        note: customerNote.value.trim(),
+        total: itemTotal
+      });
+
+      renderCart();
+      closeOrderModal();
+    });
+
+    checkoutBtn.addEventListener("click", () => {
+      if (cart.length === 0) {
+        alert("Votre panier est vide.");
+        return;
+      }
+
+      if (!currentUser) {
+        alert("Veuillez d'abord créer un compte ou vous connecter.");
+        document.getElementById("compte").scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+
+      document.getElementById("validation").scrollIntoView({ behavior: "smooth" });
+    });
+
+    refreshUserUI();
+    renderSummaryOrder();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+    "name": "les-delices-marocains",
+    "version": "1.0.0",
+    "description": "Site de vente de délices marocains",
+    "main": "backend/server.js",
+    "scripts": {
+      "start": "node backend/server.js",
+      "dev": "node backend/server.js"
+    },
+    "dependencies": {
+      "bcrypt": "^5.1.1",
+      "express": "^4.21.2",
+      "express-session": "^1.18.1",
+      "sqlite3": "^5.1.7"
+    }
+  }
