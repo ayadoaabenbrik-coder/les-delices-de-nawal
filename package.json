@@ -1,5 +1,5 @@
 {
-    "name": "les-delices-marocains",
+    "name": "le-secret-des-saveurs",
     "version": "1.0.0",
     "description": "Site de vente de délices marocains",
     "main": "backend/server.js",
