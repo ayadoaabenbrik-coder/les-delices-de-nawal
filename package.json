@@ -4,7 +4,7 @@
     "description": "Site de vente de délices marocains",
     "main": "backend/script.js",
     "scripts": {
-      "start": "node backend/server.js",
+      "start": "node backend/script.js",
       "dev": "node backend/script.js"
     },
     "dependencies": {
