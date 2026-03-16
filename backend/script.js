@@ -1,14 +1,30 @@
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 const sqlite3 = require("sqlite3").verbose();
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-const dbPath = path.join(__dirname, "database", "database.sqlite");
-const db = new sqlite3.Database(dbPath);
+// dossier backend/database
+const dbFolder = path.join(__dirname, "database");
+
+// créer le dossier s'il n'existe pas
+if (!fs.existsSync(dbFolder)) {
+  fs.mkdirSync(dbFolder, { recursive: true });
+}
+
+const dbPath = path.join(dbFolder, "database.sqlite");
+
+const db = new sqlite3.Database(dbPath, (err) => {
+  if (err) {
+    console.error("Erreur ouverture DB :", err.message);
+  } else {
+    console.log("Base de données connectée :", dbPath);
+  }
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -107,20 +123,28 @@ db.serialize(() => {
     }
   });
 
-  db.get("SELECT * FROM users WHERE email = ?", ["admin@delices.com"], async (err, user) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
+  db.get(
+    "SELECT * FROM users WHERE email = ?",
+    ["admin@delices.com"],
+    async (err, user) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
 
-    if (!user) {
-      const hashedPassword = await bcrypt.hash("admin123", 10);
-      db.run(
-        "INSERT INTO users (fullname, email, password, role) VALUES (?, ?, ?, ?)",
-        ["Admin", "admin@delices.com", hashedPassword, "admin"]
-      );
+      if (!user) {
+        try {
+          const hashedPassword = await bcrypt.hash("admin123", 10);
+          db.run(
+            "INSERT INTO users (fullname, email, password, role) VALUES (?, ?, ?, ?)",
+            ["Admin", "admin@delices.com", hashedPassword, "admin"]
+          );
+        } catch (error) {
+          console.error("Erreur création admin :", error);
+        }
+      }
     }
-  });
+  );
 });
 
 function requireAuth(req, res, next) {
@@ -298,6 +322,6 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`Serveur lancé sur http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Serveur lancé sur le port ${PORT}`);
 });
